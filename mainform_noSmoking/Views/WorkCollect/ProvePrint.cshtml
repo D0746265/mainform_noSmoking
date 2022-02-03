@@ -1,0 +1,143 @@
+﻿@model mainform_noSmoking.Models.WorkCollect.WorkCollectModel
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="KEYWords" content="我拒菸，我驕傲, 2022,蔡依林,Jolin,戒菸">
+    <meta name="description" content="我拒菸，我驕傲。所有菸品都 Get Out! ">
+    <meta name="COPYRIGHT" content="reserved, 著作權所有, John Tung Foundation,財團法人董氏基金會" />
+
+    <meta name="Author" content="105臺北市松山區復興北路57號12樓之3, 12F.-3, No.57, Fusing N. Rd., Songshan District, Taipei City 105, Taiwan (R.O.C.), telephone +886-2-2776-6133, e_quit@jtf.org.tw董氏基金會菸害防制中心">
+    <!--數字與地圖不被設置為預設電話與地圖-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="http://www.e-quit.org/images/jtf_logo.ico">
+    <title>2022 Jolin 我拒菸，我驕傲。所有菸品都 Get Out! </title>
+    <link href="~/css/print.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="MAIN_NAV">
+        <!--選單-->
+        <div class="menu">
+            <a asp-controller="HomePage" asp-action="HomePage" target="_self">活動首頁</a>
+            <a asp-controller="WorkCollect" asp-action="WorkCollect" target="_self" class="shinebtn">報名頁面</a>
+            <a asp-controller="HomePage" asp-action="Works" target="_self">作品展示</a>
+        </div>
+    </div>
+    <div class="text_wrapper">
+        <div class="image">
+            <img src="~/images/qsfb_keyvision_main.png" />
+        </div>
+
+        <div class="text">
+            <p>感謝 @Model.SchuleInfo.Schule_name @Model.StudentInfo.Student_grade 年 @Model.StudentInfo.Student_class 班 @Model.StudentInfo.Student_name 同學，</p>
+            <p>
+                參加活動拒菸作品募集活動，展現最佳拒菸態度，也恭喜您成為拒菸義工，點選下一步下載「我拒菸我驕傲-證明」。
+                本活動將於每日定時進行人工審核及更新作品，因此照片上傳後並非立即公布作品，再請耐心等候。 如果您有任何疑問，請電郵至
+                <a href="mailto:service103@jtf.org.tw" target="_blank">service103@jtf.org.tw</a>。
+            </p>
+        </div>
+
+        <div class="button_style" id="next_button">
+            <p>下一步</p>
+        </div>
+
+        <div class="canva_wrapper">
+            <canvas id="myCanvas" width="1600" height="702"></canvas>
+        </div>
+
+        <div class="buttons_wrapper">
+            <a class="button_style" id="download" download="我拒菸我驕傲-證明.png">
+                <p onClick="download()">下載證明</p>
+            </a>
+
+            <div class="button_style" id="print">
+                <p onClick="printCanvas()">列印證明</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+@section Scripts{
+    <script>
+
+        //將canva轉碼並下載
+        function download() {
+            var download = document.getElementById("download");
+            var image = document.getElementById("myCanvas").toDataURL("image/png")
+                .replace("image/png", "image/octet-stream");
+            download.setAttribute("href", image);
+        }
+
+        //canva大小調校
+        //$(function () {
+        //    InitContext();
+        //});
+        function InitContext() {
+            var $canvasDiv = $('.canva_wrapper');
+            var canvas = document.getElementById("myCanvas");
+            canvas.height = $canvasDiv.innerHeight();
+            canvas.width = $canvasDiv.innerWidth();
+        }
+
+        //按下一步隱藏"下一步按鈕"顯示"下載按鈕"
+        $('#next_button').on('click', function () {
+            $('#next_button').css('display', 'none')
+            $('.buttons_wrapper').css('display', 'flex');
+
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "/WorkCollect/GetInfo",
+                success: function (result) {
+                    //將基本資訊填入繪製成圖片
+                    var canvas = document.getElementById("myCanvas");
+                    var ctx = canvas.getContext("2d");
+                    var image = new Image();
+                    var Schule_name = result['schle_name'];
+                    var Student_grade = result['student_grade'];
+                    var Student_class = result['student_class'];
+                    var Student_name = result['student_name'];
+                    image.onload = function () {
+                        ctx.font = '900 30px Arial';
+                        ctx.drawImage(image, 0, 0);
+                        ctx.strokeStyle = "red";
+                        ctx.moveTo(400, 20);
+                        ctx.lineTo(400, 520);
+                        ctx.textAlign = 'center';
+                        //這行要填學校ctx.fillText(/*Schule_name*/, 400, 530);
+                        ctx.fillText(Schule_name, 400, 530);
+                        //這行要填學生資料ctx.fillText(/*Student_grade*/+'年'+/*Student_class*/+'班'+/*Student_name*/+'同學', 400, 580);
+                        ctx.fillText(Student_grade + ' 年 ' + Student_class + ' 班 ' + Student_name + ' 同學 ', 400, 580);
+                    };
+                    image.src = "https://live.staticflickr.com/65535/51829065567_c99fb728f3_h.jpg";
+                    image.setAttribute("crossOrigin", 'Anonymous');
+                }
+            })
+            $('#download').css('display', 'block');
+        })
+        //列印功能
+        function printCanvas() {
+            var dataUrl = document.getElementById('myCanvas').toDataURL(); //attempt to save base64 string to server using this var
+            var windowContent = '<!DOCTYPE html>';
+            windowContent += '<html>';
+            windowContent += '<head><title>Print canvas</title>';
+            windowContent += '<script>window.onload = function () {window.print(); window.close();}<\/script>';
+            windowContent += '</head>'
+            windowContent += '<body>';
+            windowContent += '<img style="width: 100%;" src="' + dataUrl + '">';
+            windowContent += '</body>';
+            windowContent += '</html>';
+            var printWin = window.open('', '', 'width=1920,height=1080');
+            printWin.document.open();
+            printWin.document.write(windowContent);
+            printWin.document.close();
+            printWin.focus();
+        }
+    </script>
+}

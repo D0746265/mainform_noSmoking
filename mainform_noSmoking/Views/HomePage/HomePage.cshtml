@@ -1,0 +1,277 @@
+﻿@using mainform_noSmoking.Models.Grading
+
+@model mainform_noSmoking.Models.Home.HomeModel
+
+@{
+    Layout = "";
+}
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="KEYWords" content="我拒菸，我驕傲, 2022,蔡依林,Jolin,戒菸">
+    <meta name="description" content="我拒菸，我驕傲。所有菸品都 Get Out! ">
+    <meta name="COPYRIGHT" content="reserved, 著作權所有, John Tung Foundation,財團法人董氏基金會" />
+
+    <meta name="Author" content="105臺北市松山區復興北路57號12樓之3, 12F.-3, No.57, Fusing N. Rd., Songshan District, Taipei City 105, Taiwan (R.O.C.), telephone +886-2-2776-6133, e_quit@jtf.org.tw董氏基金會菸害防制中心">
+    <!--數字與地圖不被設置為預設電話與地圖-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="https://www.e-quit.org/images/jtf_logo.ico">
+    <title>2022 Jolin 我拒菸，我驕傲。所有菸品都 Get Out! </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/css/index.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!--上層照片展示區-->
+    <section class="upper_content">
+        <div class="title">
+            <div>
+                <h1>臺北市國小學童</h1>
+                <div class="no_smoking">
+                    <img src="~/images/no_smoking.png" />
+                </div>
+                <h1>拒菸作品募集</h1>
+            </div>
+            <a class="apply" asp-controller="WorkCollect" asp-action="WorkCollect">作品上傳</a>
+        </div>
+        <div class="search_area">
+            <div class="tabs">
+                <a asp-controller="HomePage" asp-action="Works" asp-route-grade="5" asp-route-status="1">
+                    <div class="card_wrapper" name="GradeView" id="5">
+                        <div class="tab">
+                            <p>高年級作品</p>
+                        </div>
+                        <div class="box-container">
+                            @for (int i = 0; i < Model.ViewModels_H.Count(); i++)
+                            {
+                                <div class="box1">
+                                    <img src=@Model.ViewModels_H[i].FileInfo.File_location>
+                                    <h5>
+                                        @Model.ViewModels_H[i].SchuleInfo.Schule_name
+                                        <br> @Model.ViewModels_H[i].StudentInfo.Student_grade 年級 @Model.ViewModels_H[i].StudentInfo.Student_name
+                                    </h5>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </a>
+
+                <a asp-controller="HomePage" asp-action="Works" asp-route-grade="3" asp-route-status="1">
+                    <div class="card_wrapper" name="GradeView" id="3">
+                        <div class="tab">
+                            <p>中年級作品</p>
+                        </div>
+                        <div class="box-container">
+                            @for (int i = 0; i < Model.ViewModels_M.Count(); i++)
+                            {
+                                <div class="box2">
+                                    <img src=@Model.ViewModels_M[i].FileInfo.File_location>
+                                    <h5>
+                                        @Model.ViewModels_M[i].SchuleInfo.Schule_name
+                                        <br> @Model.ViewModels_M[i].StudentInfo.Student_grade 年級 @Model.ViewModels_M[i].StudentInfo.Student_name
+                                    </h5>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </a>
+                <a asp-controller="HomePage" asp-action="Works" asp-route-grade="1" asp-route-status="1">
+                    <div class="card_wrapper" name="GradeView" id="1">
+                        <div class="tab">
+                            <p>低年級作品</p>
+                        </div>
+                        <div class="box-container">
+                            @for (int i = 0; i < Model.ViewModels_L.Count(); i++)
+                            {
+                                <div class="box3">
+                                    <img src=@Model.ViewModels_L[i].FileInfo.File_location>
+                                    <h5>
+                                        @Model.ViewModels_L[i].SchuleInfo.Schule_name
+                                        <br> @Model.ViewModels_L[i].StudentInfo.Student_grade 年級 @Model.ViewModels_L[i].StudentInfo.Student_name
+                                    </h5>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="qsindexbg">
+        <div class="banner_btm">
+            <div class="content_wrapper">
+                <div class="vedio_and_keyvision">
+                    <div class="keyvision_Jolin">
+                        <h1>
+                            <img src="~/images/keyvision.png" alt="我拒菸我驕傲">
+                        </h1>
+                    </div>
+                    <div id="MAIN_NAV">
+                        <!--選單-->
+                        <div class="menu">
+                            <a href="https://www.e-quit.org/CustomPage/HtmlEditorPage.aspx?MId=1340&ML=3" target="new">創意表態</a>
+                            <a href="https://www.e-quit.org/CustomPage/HtmlEditorPage.aspx?MId=1329&ML=3" target="new">校園課程</a>
+                            <a href="http://www.e-quit.org/CustomPage/HtmlEditorPage.aspx?MId=1328&ML=3" target="new">拒菸驕傲</a>
+                            <a href="http://www.e-quit.org/CustomPage/HtmlEditorPage.aspx?MId=1332&ML=3" target="new">拒當肥羊</a>
+                            <a href="http://www.e-quit.org/CustomPage/HtmlEditorPage.aspx?MId=1330&ML=3" target="new">新興菸品</a>
+                            <a href="http://www.e-quit.org/CustomPage/HtmlEditorPage.aspx?MId=1333&ML=3" target="new">戒菸四招</a>
+                            <a href="https://www.e-quit.org/video/video_list.aspx?ThemId=1063" target="new">影片下載</a>
+                            <a asp-controller="HomePage" asp-action="Works" target="new">作品展示</a>
+                        </div>
+                        <div id="Videobox">
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Jb9uLy8-Hek" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                        <div class="keyvision_Jolin_hide">
+                            <img src="~/images/keyvision.png" alt="我拒菸我驕傲">
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <!--相關單位連結-->
+                        <div class="qslogo_links">
+                            <div class="links_wrap">
+                                <div class="organizer">
+                                    <a href="https://health.gov.taipei/" target="new"><img src="~/images/health_logo_white.svg" alt="台北市衛生局"></a>
+                                    <a href="https://www.doe.gov.taipei/" target="new"><img src="~/images/education_logo_white.svg" alt="台北市教育局"></a>
+                                    <a href="https://www.facebook.com/smokefreesuper" target="new"><img src="~/images/qs_logo_white.svg"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--選單結束-->
+            </div>
+        </div>
+    </section>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>
+
+<script>
+    //to works & show selected grade
+    /*
+    $('div[name="GradeView"]').on('click', function () {
+        var grade = $(this).attr('id');
+        $.ajax({
+            url: "/HomePage/GetGradeWorksFromHomePage/" + grade + "/" + 1,
+            dataType: "html",
+            type: "get",
+            success: function (data) {
+                $('select[name="Student_grade"]').val(grade);
+                $("html").html(data);
+            },
+            error: function () { alert('Error occurred in show works by grade.'); }
+        })
+    });
+    //to works & show selected grade
+</script>
+
+<script>
+    //show schools in selected district
+    //Useless
+    /*
+            <!--過濾選項>
+            <div class="filter_box">
+                <span>搜尋</span>
+                <select id="school_area" name="Location_name" asp-items="Model.ShareModel.DistrictList" class="custom-select">
+                    <option selected disabled>請選擇區域</option>
+                </select>
+                <select name="Schule_name" id="Schule_name" class="custom-select">
+                    <option selected disabled>請選擇學校</option>
+                </select>
+            </div-->
+    */
+    $(document).on('change', 'select[name="Location_name"]', function () {
+        $.ajax({
+            url: "/HomePage/GetSchule/" + $('select[name="Location_name"]').val(),
+            dataType: "Json",
+            type: "get",
+            success: function (data) {
+                $('select[name="Schule_name"]>option').remove();
+                $('select[name="Schule_name"]').append($('<option selected disabled>').text('請選擇學校'));
+                for (i = 0; i < data.length; i++) {
+                    var schule_name = data[i].split(' ')[0];
+                    var schule_id = data[i].split(' ')[1];
+
+                    $('select[name="Schule_name"]').append($('<option>').val(schule_id).text(schule_name));
+                }
+            },
+            error: function () { alert('Error occurred in show schules.'); }
+        })
+    });
+    //show schools in selected district
+</script>
+
+<script>
+    //show infos in selected schools
+    //Useless
+    $(document).on('change', 'select[name="Schule_name"]', function () {
+        $.ajax({
+            url: "/HomePage/ShowSchuleWorksToShow/" + $('select[name="Schule_name"]').val(),
+            dataType: "html",
+            type: "get",
+            success: function (data) {
+                $("body").html(data);
+            },
+            error: function () { alert('Error occurred in show schules.'); }
+        })
+    });
+    //show infos in selected schools
+</script>
+
+<script>
+    console.clear();
+    let count1 = 0;
+    const targets1 = document.querySelectorAll(".box1");
+    gsap.set(targets1, { xPercent: -100 });
+    gsap.set(targets1[0], { xPercent: 0 });
+
+    function slideIt1() {
+        gsap.to(targets1[count1], { xPercent: 100 });
+        count1 = count1 < targets1.length - 1 ? ++count1 : 0;
+        gsap.fromTo(targets1[count1], { xPercent: -100 }, { xPercent: 0 });
+        gsap.to({}, { duration: 2.5, onComplete: slideIt1 });
+    }
+
+    console.clear();
+    let count2 = 0;
+    const targets2 = document.querySelectorAll(".box2");
+    gsap.set(targets2, { xPercent: -100 });
+    gsap.set(targets2[0], { xPercent: 0 });
+
+    function slideIt2() {
+        gsap.to(targets2[count2], { xPercent: 100 });
+        count2 = count2 < targets2.length - 1 ? ++count2 : 0;
+        gsap.fromTo(targets2[count2], { xPercent: -100 }, { xPercent: 0 });
+        gsap.to({}, { duration: 2.5, onComplete: slideIt2 });
+    }
+
+    console.clear();
+    let count3 = 0;
+    const targets3 = document.querySelectorAll(".box3");
+    gsap.set(targets3, { xPercent: -100 });
+    gsap.set(targets3[0], { xPercent: 0 });
+
+    function slideIt3() {
+        gsap.to(targets3[count3], { xPercent: 100 });
+        count3 = count3 < targets3.length - 1 ? ++count3 : 0;
+        gsap.fromTo(targets3[count3], { xPercent: -100 }, { xPercent: 0 });
+        gsap.to({}, { duration: 2.5, onComplete: slideIt3 });
+    }
+
+    gsap.delayedCall(3, () => slideIt1());
+    gsap.delayedCall(3, () => slideIt2());
+    gsap.delayedCall(3, () => slideIt3());
+</script>

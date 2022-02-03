@@ -1,0 +1,17 @@
+﻿@using mainform_noSmoking.Models.Grading
+
+@model mainform_noSmoking.Models.Home.HomeModel
+
+<div class="row content">
+    @foreach (WorkViewModel viewModel in Model.ViewModels) 
+    {
+        <div class="col-md-6 col-lg-4">
+            <div class="card" name="InfoCard" id=@viewModel.StudentInfo.Student_id>
+                <div class="image_board">
+                    <img src=@viewModel.FileInfo.File_location loading="lazy"/>
+                </div>
+                <p>@viewModel.SchuleInfo.Schule_name @viewModel.StudentInfo.Student_grade 年級 @viewModel.StudentInfo.Student_name</p>
+            </div>
+        </div>
+    }
+</div>

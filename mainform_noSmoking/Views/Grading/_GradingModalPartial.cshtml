@@ -1,0 +1,41 @@
+﻿@model mainform_noSmoking.Models.Grading.GradingModel
+@{
+}
+<form>
+    <span class="close" data-dismiss="modal">&times;</span>
+    <div class="pending_content">
+        <div class="left_content">
+            <div class="image_wrapper">
+                <img src="@Model.ShareModel.ViewModel.FileInfo.File_location">
+            </div>
+            <!--
+            <h3>評分:</h3>
+            <label>主題性(40%):</label>
+            <input type="number" min="0" max="40">
+
+            <label>創意巧思(40%):</label>
+            <input type="number" min="0" max="40">
+
+            <label>整體表現(30%):</label>
+            <input type="number" min="0" max="30">
+                -->
+            <div class="GradeButter" id="nopapa">
+                <p name="Pass" id="pa">審核通過</p>
+                <p name="ToPending" id="pe">待審核</p>
+                <p name="Reject" id="nopa">審核不通過</p>
+            </div>
+        </div>
+        <div class="right_content">
+            <div class="context">
+                <label id="Student_id" name="@Model.ShareModel.ViewModel.StudentInfo.Student_id"></label>
+                <h4>姓名 : @Model.ShareModel.ViewModel.StudentInfo.Student_name</h4>
+                <h4>學校 : @Model.ShareModel.ViewModel.SchuleInfo.Schule_name</h4>
+                <h4>年級班級 : @Model.ShareModel.ViewModel.StudentInfo.Student_grade 年 @Model.ShareModel.ViewModel.StudentInfo.Student_class 班</h4>
+                <h4>導師姓名 : @Model.ShareModel.ViewModel.StudentInfo.Teacher_name</h4>
+                <h4>聯絡方式 : @Model.ShareModel.ViewModel.StudentInfo.Teacher_phone</h4>
+                <h4>電子郵件 : @Model.ShareModel.ViewModel.StudentInfo.Email_address</h4>
+                <h4>作品理念 : @Model.ShareModel.ViewModel.FileInfo.Work_concept</h4>
+            </div>
+        </div>
+    </div>
+</form>

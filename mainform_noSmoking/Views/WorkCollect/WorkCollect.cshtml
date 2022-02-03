@@ -1,0 +1,518 @@
+﻿@model mainform_noSmoking.Models.WorkCollect.WorkCollectModel
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="KEYWords" content="我拒菸，我驕傲, 2022,蔡依林,Jolin,戒菸">
+    <meta name="description" content="我拒菸，我驕傲。所有菸品都 Get Out! ">
+    <meta name="COPYRIGHT" content="reserved, 著作權所有, John Tung Foundation,財團法人董氏基金會" />
+
+    <meta name="Author" content="105臺北市松山區復興北路57號12樓之3, 12F.-3, No.57, Fusing N. Rd., Songshan District, Taipei City 105, Taiwan (R.O.C.), telephone +886-2-2776-6133, e_quit@jtf.org.tw董氏基金會菸害防制中心">
+    <!--數字與地圖不被設置為預設電話與地圖-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="https://www.e-quit.org/images/jtf_logo.ico">
+    <title>2022 Jolin 我拒菸，我驕傲。所有菸品都 Get Out! </title>
+    <link href="~/css/apply.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="title">
+        <div class="normal_title">
+            <h3>臺北市國小學童</h3>
+            <div class="no_smoking">
+                <img src="~/images/no_smoking.png">
+            </div>
+            <h3>拒菸作品募集</h3>
+        </div>
+        <div class="rwd_title">
+            <div class="rwd_upper_title">
+                <h3>臺北市國小學童</h3>
+                <div class="no_smoking">
+                    <img src="~/images/no_smoking.png">
+                </div>
+            </div>
+            <h3>拒菸作品募集</h3>
+        </div>
+    </div>
+    <div id="MAIN_NAV">
+        <!--選單-->
+        <div class="menu">
+            <a asp-controller="HomePage" asp-action="HomePage" target="_self">活動首頁</a>
+            <a href="#" target="_self" class="shinebtn">報名頁面</a>
+            <a asp-controller="HomePage" asp-action="Works" target="_self">作品展示</a>
+        </div>
+    </div>
+
+    <section class="big_wrapper">
+
+        <div class="rules">
+            <p>臺北市國小學童發揮創意進行自製照片，展現拒菸信念。</p>
+            <p>
+                <b>一、主辦單位：臺北市衛生局、臺北市教育局、董氏基金會</b>
+            </p>
+            <p>
+                <b>二、參加對象：臺北市各公私立國民小學學生。</b>
+            </p>
+            <p>
+                <b>三、參加方式：</b>
+                <br>
+                拒絕所有菸害表態，呈現方式不拘，以照片投稿上傳，盡情展現個人或家庭的「我拒菸我驕傲」的信念。
+            </p>
+            <p>
+                <b>四、作品規範：</b>
+                <br>
+                (1)	須以照片呈現，可用數位相機或智慧型手機拍攝。(可請家長或老師協助拍照上傳)
+                <br>
+                (2)	上傳照片須3M以下，畫質清晰。
+                <br>
+                (3)	照片須符合「拒菸」主題概念。但不得出現吸菸形象與菸品品牌名稱，如需出現菸品應以道具替代。
+                <br>
+                (4)	基本資料務必完整填寫。
+                <br>
+                (5)	自由填寫照片理念(200字為限)。
+                <br>
+                (6)	請用下列正確文字：菸品、紙菸、電子煙、加熱菸、新興菸品、新型菸品、吸菸危害、菸害防制法。
+            </p>
+            <p>
+                <b>五、獎品：</b>得獎獎品總價值新台幣陸萬元整。《獎品擬由吳尊賢文教基金會贊助》
+                <br>
+                (1)	低年級(1、2年級) 20名，每名郵局禮券1000元及獎狀乙紙。
+                <br>
+                (2)	中年級(3、4年級) 20名，每名郵局禮券1000元及獎狀乙紙。
+                <br>
+                (3)	高年級(5、6年級) 20名，每名郵局禮券1000元及獎狀乙紙。
+            </p>
+            <p>
+                <b>六、報名辦法：</b>
+                <br>
+                (1)	照片上傳至3/5截止。
+                <br>
+                (2)	報名網址：「我拒菸，我驕傲」網站(
+                <a href="http://jolin.e-quit.org/" target="_new">http://jolin.e-quit.org/</a>) 點選【臺北市國小學童作品募集】，填妥基本資料並上傳照片，報名成功者可下載「我拒菸我驕傲證明」。
+                <br>
+                (3)	照片經主辦單位人工審核確認是否符合主題，核准後會發布於「我拒菸我驕傲」首頁，因此作品上傳後並非立即公布。
+            </p>
+            <p id="anchor">
+                <b>七、	評選機制：主題性 30％ 、創意巧思 30％ 、整體表現 40％</b>
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>評分準則</th>
+                        <th>權重</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>主題性</td>
+                        <td>作品內容符合主題、對於議題了解程度</td>
+                        <td>30%</td>
+                    </tr>
+                    <tr>
+                        <td>創意巧思</td>
+                        <td>作品整體創意性、獨特</td>
+                        <td>30%</td>
+                    </tr>
+                    <tr>
+                        <td>整體表現</td>
+                        <td>作品理念、作品內容傳達</td>
+                        <td>40%</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>合計</td>
+                        <td>100%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                <b>八、得獎公佈：</b>擬於3月中旬前在「我拒我驕傲」網站、「拒菸Jolin粉專頁」及「臺北市政府衛生局/菸害防制專區」公布得獎名單，同時將電話聯絡得獎者導師。
+            </p>
+            <p id="policy_content">
+                <b>九、肖像與隱私權授權同意：</b>同意並授權董氏基金會、臺北市政府衛生局與臺北市政府教育局在菸害防制相關議題使用、修飾、公開展示照片。參加本活動者提供或填寫個人資料後，視為同意本主辦方將其資料於本活動目的範圍內搜集、處理暨使用之。此次提供之資料，本主辦方將遵守【個人資料保護法】之相關規定，以維護參加者權益。
+            </p>
+            <p>
+                <b>十、特別說明：</b>
+                <br>
+                (1)得獎者須簽禮券領取單，請據實填寫中文姓名全名。
+                <br>
+                (2)本獎項免予扣繳，但懇請提供身分證影本資料以供存查。
+            </p>
+        </div>
+
+        <div class="apply_form">
+            <form method="post" id="WorkSubmitForm" enctype="multipart/form-data">
+                <div class="basic_info">
+                    <div class="basic_info_content">
+                        <h4>
+                            <b>上傳作品：<span style="color:red;">*為必填</span></b>
+                        </h4>
+                        <div>
+                            <label for="Student_name"><span style="color:red;">*</span>姓名：</label>
+                            <input id="username" type="text" name="Student_name" required>
+                        </div>
+
+                        <div>
+                            <label><span style="color:red;">*</span>學校：</label>
+                            <select id="school_area" name="Location_name" asp-items="@Model.DistrictList" class="custom-select" required>
+                                <option selected disabled>請選擇區域</option>
+                            </select>
+                            <select id="school_name" name="Schule_name" class="custom-select" required>
+                                <option selected disabled>請選擇學校</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="Student_grade"><span style="color:red;">*</span>年級：</label>
+                            <select name="Student_grade" id="grade" class="custom-select" required>
+                                <option selected disabled>請選擇年級</option>
+                                @for (int i = 0; i < 6; i++)
+                                {
+                                    char[] grade = { '一', '二', '三', '四', '五', '六' };
+                                    <option value="@(i+1)">@grade[i]年級</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="Student_class"><span style="color:red;">*</span>班級：</label>
+                            <input id="class" type="text" name="Student_class" required>
+                            <label for="Student_class">班</label>
+                        </div>
+
+                        <div>
+                            <label for="Teacher_name"><span style="color:red;">*</span>班級導師：</label>
+                            <input id="teacher_name" type="text" name="Teacher_name" required>
+                        </div>
+
+                        <div>
+                            <label for="Teacher_phone"><span style="color:red;">*</span>聯絡方式(建議留班級導師電話)：</label>
+                            <input id="phone_num" type="tel" name="Teacher_phone" required>
+                        </div>
+
+                        <div>
+                            <label for="Email_address"><span style="color:red;">*</span>Email：</label>
+                            <input id="email" type="email" name="Email_address" pattern="[A-z0-9._%+-]+@@[a-z0-9.-]+(\.[a-z]{2,})+$" required>
+                        </div>
+
+                        <div class="image_upload">
+                            <b>
+                                <p>
+                                    <span style="color:red;">*</span>上傳檔案：
+                                </p>
+                            </b>
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input" id="customFile" name="filename" accept="image/*" required>
+                                <label class="custom-file-label" for="customFile">選擇檔案</label>
+                            </div>
+                        </div>
+
+                        <div class="image_preview">
+                            <span><b>預覽圖：</b></span>
+                            上傳進度
+                            <span id="main-thread-progress"></span>
+                            <p id="main-thread-log"></p>
+                            <img id="preview-after-compress" />
+                        </div>
+                    </div>
+                    <div class="right_image">
+                        <img src="~/images/keyvision.png" />
+                    </div>
+                </div>
+
+                <label for="Work_concept">作品理念(200字以內，非必填)：</label>
+                <p class="wordsNum">還剩下200個字可以輸入</p>
+                <textarea id="thought" name="Work_concept" placeholder="輸入文字" maxlength="200"></textarea>
+                <p>備註：本活動將於每日定時進行人工審核及更新作品，因此作品上傳後並非立即公布作品，再請耐心等候。若有任何問題請來電詢問 (02)2776-6133 #103</p>
+
+                <div class="policy_box">
+                    <input type="checkbox" id="policy" required>
+                    <label for="policy">我已詳閱<a href="#anchor">肖像與隱私權政策並同意</a></label>
+                </div>
+
+                <div class="submit_button">
+                    <input type="submit" id="submit" name="SubmitWork" value="確認提交" asp-controller="WorkCollect" asp-action="ProvePrint">
+                </div>
+            </form>
+        </div>
+    </section>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.17/dist/browser-image-compression.js"></script>
+</body>
+
+</html>
+@section Scripts{
+    <script>
+        //show schools in selected district
+        $(document).on('click', 'select[name="Location_name"]', function () {
+            //alert($('select[name="District"]').val());
+            $.ajax({
+                url: "/WorkCollect/GetSchule/" + $('select[name="Location_name"]').val(),
+                dataType: "Json",
+                type: "get",
+                success: function (data) {
+                    $('select[name="Schule_name"]>option').remove();
+                    $('select[name="Schule_name"]').append($('<option selected disabled>').text('請選擇學校'));
+                    for (i = 0; i < data.length; i++) {
+                        //console.log(data[i]);
+                        $('select[name="Schule_name"]').append($('<option>').val(data[i]).text(data[i]));
+                    }
+                },
+                error: function () { alert('Error occurred in show schules.'); }
+            })
+        });
+        //show schools in selected district
+    </script>
+
+    <script>
+        $("form").submit(function (e) {
+            e.preventDefault();
+        });
+    </script>
+
+    <script>
+        //submit work ●●●●●
+        $(document).on("click", 'input[name="SubmitWork"]', function (e) {
+            //e.preventDefault();
+            var url = $(this).attr('formaction');
+            var check = true;
+            if ($("#school_area option:selected").text() == "請選擇區域") {
+                alert("請選擇區域");
+                $('#school_area').css('border', '1px solid red');
+                check = false;
+            } else if ($("#school_name option:selected").text() == "請選擇學校") {
+                alert("請選擇學校");
+                $('#school_name').css('border', '1px solid red');
+                check = false;
+            } else if ($("#grade option:selected").text() == "請選擇年級") {
+                alert("請選擇年級");
+                $('#grade').css('border', '1px solid red');
+                check = false;
+            }
+            $('#WorkSubmitForm')[0].checkValidity();//KNN!!!!!!
+
+            if (check) {
+                //var confirmation = window.confirm("確定提交?"); //confirmation variable will contain true/false.
+                //if (confirmation)
+                if ($('#WorkSubmitForm')[0].checkValidity()) {
+                    $.ajax({
+                        type: "post",
+                        dataType: "html",
+                        url: decodeURIComponent(url),//ProvePrint
+                        data: $("#WorkSubmitForm").serialize(),
+                        success: function (result) {
+                            alert("Success!");
+                            $.ajax({
+                                type: "post",
+                                //processData: false,
+                                //contentType: 'application/octet-stream',
+                                url: "/WorkCollect/GetBase64",
+                                data: {
+                                    base64: base64_code,
+                                    file_name: image.name
+                                },
+                                dataType: "json",
+                                success: function () {
+                                    //alert("Success IN!");
+                                    console.log(base64_code);
+                                }, error: function () { alert('Error occurred in get base64.'); }
+                            })
+                            $('body').html(result);
+                        },
+                        error: function () { alert('Error occurred in submit work.'); }
+                    });
+                }
+            }
+
+        });
+        //submit work ●●●●● ●●●● ●●● ●● ●
+    </script>
+
+    <script>
+        //show image name
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+
+    <script>
+        //監聽字數
+        var checkStrLengths = function (str, maxLength) {
+            var maxLength = maxLength;
+            var result = 0;
+            if (str && str.length > maxLength) {
+                result = maxLength;
+            } else {
+                result = str.length;
+            }
+            return result;
+        }
+
+        $("#thought").on('input propertychange', function () {
+            //獲取輸入內容
+            var userDesc = $(this).val();
+            //判斷字數
+            var len;
+            if (userDesc) {
+                len = checkStrLengths(userDesc, 200);
+            } else {
+                len = 0
+            }
+            //顯示字數
+            $(".wordsNum").html('還剩下' + (200 - len) + '個字可以輸入');
+        });
+    </script>
+
+    <script>
+        //select district, school
+        $('select').on('click', function () {
+            $(this).css('border', '1px solid #ced4da')
+        })
+    </script>
+
+    <script>
+        //[我已確認]滑動效果
+        $('.policy_box a').on('click', function (e) {
+            if (this.hash !== '') {
+                e.preventDefault();
+
+                const hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800);
+
+                $('#policy_content').css('animation-name', 'highlight');
+            }
+        });
+    </script>
+
+    <script>
+        //Image upload, preprocessing//
+        //取得使用者上傳照片檔案大小
+        function findSize() {
+            var fileInput = document.getElementById("customFile");
+            try {
+                return fileInput.files[0].size; // Size returned in bytes.
+            } catch (e) {
+                var objFSO = new ActiveXObject("Scripting.FileSystemObject");
+                var e = objFSO.getFile(fileInput.value);
+                var fileSize = e.size;
+            }
+        }
+        $('#customFile').on('input', function (event) {
+            var file_size_mb = findSize() / 1024 / 1024;
+            console.log(file_size_mb);
+            if (file_size_mb >= 1) {
+                compressImage(event);
+            } else {
+                withoutCompressImage(event);
+            }
+        });
+
+
+        var blob, base64_code, image;
+        function compressImage(event) {
+            var file = event.target.files[0]
+            image = file
+            console.log(file)
+            var logDom, progressDom
+
+            logDom = document.querySelector('#main-thread-log')
+            progressDom = document.querySelector('#main-thread-progress')
+
+            logDom.innerHTML = 'Source image size:' + (file.size / 1024 / 1024).toFixed(2) + 'mb'
+            console.log('input', file)
+            imageCompression.getExifOrientation(file).then(function (o) {
+                console.log('ExifOrientation', o)
+            })
+
+            var options = {
+                maxSizeMB: parseInt(1),
+                //maxSizeMB: parseFloat(0.25),
+                maxWidthOrHeight: parseInt(1920),
+                onProgress: onProgress
+            }
+
+            imageCompression(file, options)
+                .then(function (output) {
+                    $('.image_preview').css('display', 'block')
+                    //logDom.innerHTML += ', output size:' + (output.size / 1024 / 1024).toFixed(2) + 'mb'
+                    blob = output;
+                    console.log('output', output)
+                    //呼叫blob轉換Base64
+                    blobToDataURI(blob, function (result) {
+                        base64_code = result;
+                        console.log(result);
+                    })
+                    const downloadLink = URL.createObjectURL(output)
+                    console.log(downloadLink)
+                    logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">下載壓縮後圖片</a>'
+                    document.getElementById('preview-after-compress').src = downloadLink
+                    //return uploadToServer(output)
+                })
+                .catch(function (error) {
+                    alert(error.message)
+                })
+
+
+            function onProgress(p) {
+                progressDom.innerHTML = '(' + p + '%' + ')'
+            }
+        }
+
+        //blob格式再轉換為base64格式
+        function blobToDataURI(blob, callback) {
+            var reader = new FileReader();
+            reader.readAsDataURL(blob, callback);
+            reader.onload = function (e) {
+                callback(e.target.result);
+            }
+        }
+
+        function withoutCompressImage(e) {
+            var file = e.target.files[0]
+            image = file
+            console.log(file)
+            var logDom, progressDom
+
+            logDom = document.querySelector('#main-thread-log')
+            progressDom = document.querySelector('#main-thread-progress')
+
+            //logDom.innerHTML = 'Source image size:' + (file.size / 1024 / 1024).toFixed(2) + 'mb'
+            console.log('input', file)
+            imageCompression.getExifOrientation(file).then(function (o) {
+                console.log('ExifOrientation', o)
+            })
+
+            blob = file;
+            //呼叫blob轉換Base64
+            blobToDataURI(blob, function (result) {
+                base64_code = result;
+                console.log(result);
+            })
+            const downloadLink = URL.createObjectURL(file)
+            console.log(downloadLink)
+            $('.image_preview').css('display', 'block')
+            logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">下載圖片</a>'
+            document.getElementById('preview-after-compress').src = downloadLink
+        }
+
+
+                            //function uploadToServer(file) {
+                                // const formData = new FormData()
+                                // formData.append('image', file, file.name)
+                                // const url = 'http://localhost:3000/image-upload-api'
+                                // console.log('calling api', url, 'with data', Array.from(formData.entries())[0])
+                                // return fetch(url, {
+                                //   method: 'POST',
+                                //   body: formData
+                                // }).then(res => res.json())
+                                //   .then(body => console.log('got server response', body))
+                            //}
+    </script>
+}

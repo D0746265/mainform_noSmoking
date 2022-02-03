@@ -1,0 +1,37 @@
+﻿@using mainform_noSmoking.Models.Grading
+
+@model mainform_noSmoking.Models.Grading.GradingModel
+<table>
+    <thead>
+        <tr>
+            <th>作品編碼</th>
+            <th>照片預覽</th>
+            <th>
+                <select name="Student_grade">
+                    <option selected value="0">全部年級</option>
+                    <option value="1">低年級</option>
+                    <option value="3">中年級</option>
+                    <option value="5">高年級</option>
+                </select>
+            </th>
+            <th>投稿時間</th>
+            <th>審核狀態</th>
+        </tr>
+    </thead>
+    <!--GradingTable-->
+    <tbody>
+        @foreach (WorkViewModel info in Model.ShareModel.ViewModels)
+        {
+            <tr id="@info.StudentInfo.Student_id" name="StudentAndWork">
+                <td>@info.FileInfo.File_Image_id.ToString("0000")</td>
+                <td>
+                    <img src=@info.FileInfo.File_location>
+                </td>
+                <td>@info.StudentInfo.Student_grade 年級</td>
+                <td>@info.FileInfo.Upload_time</td>
+                <td>@((info.StudentInfo.Pass_or_Not == 0)?"未審核":null)@((info.StudentInfo.Pass_or_Not == 1)?"已通過":null)@((info.StudentInfo.Pass_or_Not == 2)?"未通過":null) </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
