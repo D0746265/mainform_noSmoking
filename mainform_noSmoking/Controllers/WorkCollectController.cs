@@ -57,14 +57,6 @@ namespace mainform_noSmoking.Controllers
 
             byte[] base64Byte = Convert.FromBase64String(pureBase64);
             System.IO.File.WriteAllBytes(path, base64Byte);
-
-            //using (var ms = new MemoryStream(base64Byte))
-            //{
-            //    using (Image image = Image.FromStream(ms))
-            //    {
-            //        image.Save(path);                    
-            //    }
-            //}
             
             path = path[(path.IndexOf("\\Works"))..];
 

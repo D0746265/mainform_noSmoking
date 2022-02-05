@@ -74,13 +74,16 @@
             <div class="sales-boxes">
                 <div class="recent-sales box">
                     <div class="title">待審核資料</div>
-                    <div class="sales-details">
-                        <!--GradingTable-->
-                        <div id="partialGrading">
-                            @await Html.PartialAsync("_GradingPartial", Model)
+                    <form method="post">
+                        <button type="submit" asp-controller="Grading" asp-action="GetReport">Get Report</button>
+                        <div class="sales-details">
+                            <!--GradingTable-->
+                            <div id="partialGrading">
+                                @await Html.PartialAsync("_GradingPartial", Model)
+                            </div>
+                            <!--GradingTable-->
                         </div>
-                        <!--GradingTable-->
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

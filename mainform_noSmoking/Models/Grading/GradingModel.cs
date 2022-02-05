@@ -69,6 +69,6 @@ namespace mainform_noSmoking.Models.Grading
                 ShareModel.ViewModels.Add(ShareModel.ViewModel);
             }
 
-    }
+        }
     }
 }
