@@ -60,7 +60,7 @@ namespace mainform_noSmoking.Controllers
         
         [HttpPost]
         [Route("[controller]/[action]")]
-        public IActionResult GetReport(IFormCollection data, int pass_or_not = 0)
+        public IActionResult GetReport(IFormCollection data)
         {
             string[] headers = { "審核結果", "學生姓名", "學校區域", "學校名稱", "年級", "班級", "導師姓名", "聯絡方式", "學生Email", "檔案名稱", "上傳時間", "作品理念" };
 
@@ -73,7 +73,7 @@ namespace mainform_noSmoking.Controllers
             }
             else
             {
-                return RedirectToAction("Grading", new { grade = data["Student_grade"], status = 0 });
+                return RedirectToAction("Grading", new { grade = data["Student_grade"], status = data["Status"] });
             }
         }
 

@@ -76,6 +76,7 @@
                     <div class="title">待審核資料</div>
                     <form method="post">
                         <button type="submit" asp-controller="Grading" asp-action="GetReport">Get Report</button>
+                        <input name="Status" value="0" hidden >
                         <div class="sales-details">
                             <!--GradingTable-->
                             <div id="partialGrading">
@@ -112,6 +113,7 @@
         //show ...
         $(document).on("click", 'a[name="Alles"]', function () {
             var grade = $('select[name="Student_grade"]').val();
+            $('input[name="Status"]').val(3);
             $.ajax({
                 url: "/Grading/GetGradeWorks/" + grade + "/" + 3,
                 dataType: "html",
@@ -131,6 +133,7 @@
         //show ...
         $(document).on("click", 'a[name="Pending"]', function () {
             var grade = $('select[name="Student_grade"]').val();
+            $('input[name="Status"]').val(0);
             $.ajax({
                 url: "/Grading/GetGradeWorks/" + grade + "/" + 0,
                 dataType: "html",
@@ -150,6 +153,7 @@
         //show ...
         $(document).on("click", 'a[name="UnPasses"]', function () {
             var grade = $('select[name="Student_grade"]').val();
+            $('input[name="Status"]').val(2);
             $.ajax({
                 url: "/Grading/GetGradeWorks/" + grade + "/" + 2,
                 dataType: "html",
