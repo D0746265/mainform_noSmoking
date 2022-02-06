@@ -44,6 +44,10 @@
               "target": "Package",
               "version": "[5.0.2, )"
             },
+            "ReflectionIT.Mvc.Paging": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.3, )"

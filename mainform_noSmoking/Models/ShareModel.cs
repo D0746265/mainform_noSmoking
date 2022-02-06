@@ -20,7 +20,9 @@ namespace mainform_noSmoking.Models
 
         public List<string> Schules;
         public List<SchuleInfo> SchuleList;
-        public List<string> SchuleSelectList;
+        public List<SelectListItem> SchuleSelectList;
+
+        public List<SelectListItem> GradeSelectList;
         public ShareModel()
         {
             ShareContext ??= new ShareContext(DBTest.ConnectionString);
@@ -34,14 +36,12 @@ namespace mainform_noSmoking.Models
 
             foreach (StudentInfo info in tmpStudentList)
             {
-                Console.WriteLine(DateTime.Now.Second + "." +DateTime.Now.Millisecond);
                 ShareContext.GetImage(info.File_Image_id, out FileInfo fileInfo);
-                Console.WriteLine(DateTime.Now.Second + "." + DateTime.Now.Millisecond);
                 ShareContext.GetSchule(info.Schule_id, out SchuleInfo schuleInfo);
-                Console.WriteLine(DateTime.Now.Second + "." + DateTime.Now.Millisecond);
                 ViewModels.Add(new WorkViewModel { StudentInfo = info, FileInfo = fileInfo, SchuleInfo = schuleInfo });
-                Console.WriteLine(DateTime.Now.Second + "." + DateTime.Now.Millisecond);
-                Console.WriteLine();
+
+                //Console.WriteLine(DateTime.Now.Second + "." + DateTime.Now.Millisecond);
+                //Console.WriteLine();
             }
         }
         public void GetWork(int student_id)
@@ -61,12 +61,22 @@ namespace mainform_noSmoking.Models
             List<SelectListItem> temp = new List<SelectListItem>();
             ShareContext.GetDistrict(out Districts);
 
+            int index = 0;
+            temp.Add(new SelectListItem()
+            {
+                Text = "全部地區",
+                Value = index.ToString()
+            });
+            index += 1;
+
             foreach (string t in Districts)
             {
                 temp.Add(new SelectListItem()
                 {
-                    Text = t
+                    Text = t,
+                    Value = index.ToString()
                 });
+                index += 1;
             }
             DistrictList = temp;
 
@@ -83,10 +93,21 @@ namespace mainform_noSmoking.Models
             }
             Schules = temp;
 
-            List<string> tmp = new List<string>();
+            //List<string> tmp = new List<string>();
+            //foreach (SchuleInfo t in SchuleList)
+            //{
+            //    tmp.Add(t.Schule_name + " " + t.Schule_id);
+            //}
+            //SchuleSelectList = tmp;
+
+            List<SelectListItem> tmp = new List<SelectListItem>();
             foreach (SchuleInfo t in SchuleList)
             {
-                tmp.Add(t.Schule_name + " " + t.Schule_id);
+                tmp.Add(new SelectListItem()
+                {
+                    Text = t.Schule_name,
+                    Value = t.Schule_id.ToString()
+                });
             }
             SchuleSelectList = tmp;
 

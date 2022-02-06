@@ -37,16 +37,15 @@
                 <span>搜尋</span>
                 <select id="school_area" name="Location_name" asp-items="@Model.ShareModel.DistrictList" class="custom-select">
                     <option selected disabled>請選擇區域</option>
-                    <option value="0">全部地區</option>
                 </select>
-                <select name="Schule_name" id="Schule_name" class="custom-select">
+                <select name="Schule_name" id="Schule_name" asp-items="@Model.ShareModel.SchuleSelectList" class="custom-select">
                     <option selected disabled>請選擇學校</option>
                 </select>
-                <select id="Student_grade" name="Student_grade" class="custom-select">
-                    <option selected value="0">全部年級</option>
-                    <option value="1">低年級</option>
-                    <option value="3">中年級</option>
-                    <option value="5">高年級</option>
+                <select id="Student_grade" name="Student_grade" asp-items="@Model.ShareModel.GradeSelectList" class="custom-select">
+                    @*<option selected value="0">全部年級</option>
+                        <option value="1">低年級</option>
+                        <option value="3">中年級</option>
+                        <option value="5">高年級</option>*@
                 </select>
             </div>
         </div>
@@ -55,9 +54,15 @@
             @await Html.PartialAsync("_WorksPartial", Model)
         </div>
         <!--Works-->
-
     </div>
 </div>
+
+<nav style="margin-left: 45%;">
+    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.ViewModelsInPaging })
+</nav>
+<nav aria-label="Suppliers navigation example">
+    <vc:pager paging-list="@Model.ViewModelsInPaging" />
+</nav>
 
 @*work modal*@
 <div class="modal" id="WorkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -74,18 +79,25 @@
         //show schools in selected district
         $(document).on('change', 'select[name="Location_name"]', function () {
             var Location_name = $('select[name="Location_name"]').val();
-            if (Location_name == 0) {
-                $.ajax({
-                    url: "/HomePage/ShowSchuleWorks/" + Location_name,
-                    dataType: "html",
-                    type: "get",
-                    success: function (data) {
-                        $('#partialWorks').html(data);
-                    },
-                    error: function () { alert('Error occurred in show all schules.'); }
-                })
-                //document.location.href = "/HomePage/Works";
-            } else {
+            if (Location_name == 0) {   //when choose all district show all passed work
+                {/*
+                    $.ajax({
+                        url: "/HomePage/ShowSchuleWorks/" + Location_name,
+                        dataType: "html",
+                        type: "get",
+                        success: function (data) {
+                            $('select[name="Schule_name"]>option').remove();
+                            $('select[name="Schule_name"]').append($('<option selected disabled>').text('請選擇學校'));
+                            $('#partialWorks').html(data);
+                        },
+                        error: function () { alert('Error occurred in show all schules.'); }
+                    })
+                    */}
+                $('select[name="Schule_name"]>option').remove();
+                $('select[name="Schule_name"]').append($('<option selected disabled>').text('請選擇學校'));
+                document.location.href = "/HomePage/Works?Location_name_value=" + Location_name;
+            } else {    //when choose district show schules
+                Location_name = $('select[name="Location_name"]>option:selected').text();
                 $.ajax({
                     url: "/HomePage/GetSchule/" + Location_name,
                     dataType: "Json",
@@ -94,8 +106,8 @@
                         $('select[name="Schule_name"]>option').remove();
                         $('select[name="Schule_name"]').append($('<option selected disabled>').text('請選擇學校'));
                         for (i = 0; i < data.length; i++) {
-                            var schule_name = data[i].split(' ')[0];
-                            var schule_id = data[i].split(' ')[1];
+                            var schule_name = data[i].text;
+                            var schule_id = data[i].value;
 
                             $('select[name="Schule_name"]').append($('<option>').val(schule_id).text(schule_name));
                         }
@@ -110,56 +122,47 @@
 
     <script>
         var schule_id
+        var Location_name_value
         //show infos in selected schools
         $(document).on('change', 'select[name="Schule_name"]', function () {
+            var Location_name_value = $('select[name="Location_name"]>option:selected').val();
             schule_id = $('select[name="Schule_name"]').val();
-            $.ajax({
-                url: "/HomePage/ShowSchuleWorks/" + $('select[name="Schule_name"]').val(),
-                dataType: "html",
-                type: "get",
-                success: function (data) {
-                    $('#partialWorks').html(data);
-                },
-                error: function () { alert('Error occurred in show schules.'); }
-            })
+            {/*
+                $.ajax({
+                    url: "/HomePage/ShowSchuleWorks/" + schule_id,
+                    dataType: "html",
+                    type: "get",
+                    success: function (data) {
+                        $('#partialWorks').html(data);
+                    },
+                    error: function () { alert('Error occurred in show schules.'); }
+                })
+                */}
+            document.location.href = "/HomePage/Works?schule_id=" + schule_id + "&Location_name_value=" + Location_name_value;
         });
         //show infos in selected schools
-    </script>
-
-    <script>
-        /*
-        //show infos in selected grade
-        $(document).on('change', 'select[name="Student_grade"]', function () {
-        var grade = $('select[name="Student_grade"]').val();
-        $.ajax({
-        url: "/Grading/GetGradeWorks/" + grade + "/" + 0,
-        dataType: "html",
-        type: "get",
-        success: function (data) {
-        $('#partialWork').html(data);
-        $('select[name="Student_grade"]').val(grade);
-        },
-        error: function () { alert('Error occurred in show info by grade.'); }
-        })
-        });
-        //show infos in selected grade
     </script>
 
     <script>
         //show infos in selected grade
         $(document).on('change', 'select[name="Student_grade"]', function () {
             var grade = $('select[name="Student_grade"]').val();
-            $.ajax({
-                url: "/HomePage/GetGradeWorks/" + grade + "/" + 1 + "?schule_id=" + schule_id,
-                dataType: "html",
-                type: "get",
-                success: function (data) {
-                    console.log(data);
-                    $('#partialWorks').html(data);
-                    $('select[name="Student_grade"]').val(grade);
-                },
-                error: function () { alert('Error occurred in show info by grade.'); }
-            })
+            Location_name_value = $('select[name="Location_name"]>option:selected').val();
+            schule_id = $('select[name="Schule_name"]').val();
+            {/*
+                $.ajax({
+                    url: "/HomePage/GetGradeWorks/" + grade + "/" + 1 + "?schule_id=" + schule_id,
+                    dataType: "html",
+                    type: "get",
+                    success: function (data) {
+                        console.log(data);
+                        $('#partialWorks').html(data);
+                        $('select[name="Student_grade"]').val(grade);
+                    },
+                    error: function () { alert('Error occurred in show info by grade.'); }
+                })
+                */}
+            document.location.href = "/HomePage/Works?schule_id=" + schule_id + "&grade=" + grade + "&Location_name_value=" + Location_name_value;;
         });
         //show infos in selected grade
     </script>
@@ -180,6 +183,6 @@
                 error: function () { alert('Error occurred in get work.'); }
             })
         })
-            //show work modal
+                            //show work modal
     </script>
 }
