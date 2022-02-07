@@ -458,10 +458,6 @@ footer {
             }
 }
 
-footer .organizer_logos .logo:nth-child(3) {
-    margin-left: 0;
-}
-
 footer .logo {
     max-width: 140px;
     height: auto;

@@ -44,6 +44,10 @@
               "target": "Package",
               "version": "[5.0.2, )"
             },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.5.5, )"
+            },
             "ReflectionIT.Mvc.Paging": {
               "target": "Package",
               "version": "[6.0.1, )"
