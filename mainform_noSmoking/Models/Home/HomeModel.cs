@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using mainform_noSmoking.Models.SQLModel;
 using mainform_noSmoking.Models.Grading;
+using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace mainform_noSmoking.Models.Home
 {
@@ -15,6 +17,7 @@ namespace mainform_noSmoking.Models.Home
         public List<WorkViewModel> ViewModels_L { get; set; }
         public List<WorkViewModel> ViewModels_M { get; set; }
         public List<WorkViewModel> ViewModels_H { get; set; }
+        public PagingList<WorkViewModel> ViewModelsInPaging { get; set; }
         public HomeModel()
         {
             HomeContext ??= new HomeContext(DBTest.ConnectionString);
@@ -26,6 +29,8 @@ namespace mainform_noSmoking.Models.Home
 
         public void Initial()
         {
+            ShareModel.GetDistrict();
+
             ShareModel.ViewModel.StudentInfo = new StudentInfo()
             {
                 Student_id = 0,
@@ -45,12 +50,30 @@ namespace mainform_noSmoking.Models.Home
                 Schule_name = "",
                 Location_name = ""
             };
-        }
-        public void GetWorks()
-        {
-            ShareModel.GetDistrict();
 
-            int NumOfStudent = 5;
+            string[] gradeClass = { "低年級", "中年級", "高年級" };
+            int index = 0;
+
+            List<SelectListItem> temp = new List<SelectListItem>();
+            temp.Add(new SelectListItem()
+            {
+                Text = "全部年級",
+                Value = index.ToString()
+            });
+            index = 1;
+            foreach (string t in gradeClass)
+            {
+                temp.Add(new SelectListItem()
+                {
+                    Text = t,
+                    Value = index.ToString()
+                });
+                index += 2;
+            }
+            ShareModel.GradeSelectList = temp;
+        }
+        public void GetHomePageWorks(int NumOfStudent = 5)
+        {            
             List<StudentInfo> LowGrade;
             List<StudentInfo> MedGrade;
             List<StudentInfo> HighGrade;
@@ -82,42 +105,38 @@ namespace mainform_noSmoking.Models.Home
                 ViewModels_H.Add(ShareModel.ViewModel);
             }
         }
-        public void ShowWorks(int grade, int status)
-        {
-            ShareModel.GetDistrict();
-
-            Initial();
-
-            List<StudentInfo> tmp = ShareModel.GetWorks(0, grade, status);
-
-            //HomeContext.GetAllWorks(out List<StudentInfo> tmp);
-
-            ViewModels = new List<WorkViewModel>();
-            foreach (StudentInfo studentInfo in tmp)
-            {
-                ShareModel.GetWork(studentInfo.Student_id);
-                Anonymously(ShareModel);
-                ViewModels.Add(ShareModel.ViewModel);
-            }
-            return;
-        }
         public void GetSchules(string district) { 
             ShareModel.GetSchules(district);
             return;
         }
-        public void GetSchuleWorks(int schule_id)
-        {
-            //HomeContext.GetSelectWorks(schule_id, out List<StudentInfo> tmp);
-            List<StudentInfo> tmp = ShareModel.GetWorks(schule_id, 0, 1);
+        //public void ShowWorks(int grade, int status)
+        //{          
 
-            ViewModels = new List<WorkViewModel>();
-            foreach(StudentInfo studentInfo in tmp)
-            {
-                ShareModel.GetWork(studentInfo.Student_id);
-                Anonymously(ShareModel);
-                ViewModels.Add(ShareModel.ViewModel);
-            }
-        }
+        //    Initial();
+
+        //    List<StudentInfo> tmp = ShareModel.GetWorks(0, grade, status);
+
+        //    ViewModels = new List<WorkViewModel>();
+        //    foreach (StudentInfo studentInfo in tmp)
+        //    {
+        //        ShareModel.GetWork(studentInfo.Student_id);
+        //        Anonymously(ShareModel);
+        //        ViewModels.Add(ShareModel.ViewModel);
+        //    }
+        //    return;
+        //}
+        //public void GetSchuleWorks(int schule_id)
+        //{
+        //    List<StudentInfo> tmp = ShareModel.GetWorks(schule_id, 0, 1);
+
+        //    ViewModels = new List<WorkViewModel>();
+        //    foreach(StudentInfo studentInfo in tmp)
+        //    {
+        //        ShareModel.GetWork(studentInfo.Student_id);
+        //        Anonymously(ShareModel);
+        //        ViewModels.Add(ShareModel.ViewModel);
+        //    }
+        //}
         public void GetImage(int student_id)
         {
             ShareModel.GetWork(student_id);
@@ -125,8 +144,6 @@ namespace mainform_noSmoking.Models.Home
         }
         public void GetWorks(int schule_id, int grade, int status)
         {
-            //Useless
-
             Initial();
 
             List<StudentInfo> tmp;
@@ -146,7 +163,25 @@ namespace mainform_noSmoking.Models.Home
         {
             try
             {
-                shareModel.ViewModel.StudentInfo.Student_name = shareModel.ViewModel.StudentInfo.Student_name.Remove(1, 1).Insert(1, "〇");
+                string anonymousName = "";
+                int nameLength = shareModel.ViewModel.StudentInfo.Student_name.Count();
+                int startIndex = 1;
+                int removeCount = nameLength - 2;
+                if (removeCount != 0)
+                {
+                    anonymousName = shareModel.ViewModel.StudentInfo.Student_name.Remove(startIndex, removeCount);
+                    for (int i = startIndex; i <= removeCount; i++)
+                    {
+                        anonymousName = anonymousName.Insert(i, "〇");
+                    }
+                }
+                else
+                {
+                    anonymousName = shareModel.ViewModel.StudentInfo.Student_name.Remove(startIndex, 1);
+                    anonymousName = anonymousName.Insert(1, "〇");
+                }
+                shareModel.ViewModel.StudentInfo.Student_name = anonymousName;
+                //shareModel.ViewModel.StudentInfo.Student_name = shareModel.ViewModel.StudentInfo.Student_name.Remove(1, 1).Insert(1, "〇");
             }
             catch(ArgumentOutOfRangeException)
             {
