@@ -73,10 +73,12 @@
         <div class="home-content">
             <div class="sales-boxes">
                 <div class="recent-sales box">
-                    <div class="title">待審核資料</div>
                     <form method="post">
-                        <button type="submit" asp-controller="Grading" asp-action="GetReport">Get Report</button>
-                        <input name="Status" value="0" hidden >
+                        <div class="upper_title">
+                            <div class="title" id="title_name">待審核作品</div>
+                            <button class="button-54" type="submit" asp-controller="Grading" asp-action="GetReport">Get Report</button>
+                        </div>
+                        <input name="Status" value="0" hidden>
                         <div class="sales-details">
                             <!--GradingTable-->
                             <div id="partialGrading">
@@ -122,6 +124,7 @@
                     status = 3
                     $('#partialGrading').html(data);
                     $('select[name="Student_grade"]').val(grade);
+                    $('#title_name').text("所有作品");
                 },
                 error: function () { alert('Error occurred in show info by grade.'); }
             })
@@ -142,6 +145,7 @@
                     status = 0
                     $('#partialGrading').html(data);
                     $('select[name="Student_grade"]').val(grade);
+                    $('#title_name').text("待審核作品");
                 },
                 error: function () { alert('Error occurred in show info by grade.'); }
             })
@@ -162,6 +166,7 @@
                     status = 2
                     $('#partialGrading').html(data);
                     $('select[name="Student_grade"]').val(grade);
+                    $('#title_name').text("未通過作品");
                 },
                 error: function () { alert('Error occurred in show info by grade.'); }
             })
