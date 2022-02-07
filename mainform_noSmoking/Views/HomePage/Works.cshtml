@@ -57,7 +57,7 @@
     </div>
 </div>
 
-<nav style="margin-left: 45%;">
+<nav style="display: flex;justify-content: center;">
     @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.ViewModelsInPaging })
 </nav>
 <nav aria-label="Suppliers navigation example">
