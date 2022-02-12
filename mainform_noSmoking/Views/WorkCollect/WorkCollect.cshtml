@@ -248,10 +248,11 @@
 @section Scripts{
     <script>
         //show schools in selected district
-        $(document).on('click', 'select[name="Location_name"]', function () {
-            //alert($('select[name="District"]').val());
+        $(document).on('change', 'select[name="Location_name"]', function () {
+            Location_name = Location_name = $('select[name="Location_name"]>option:selected').text();
+            //alert(Location_name);
             $.ajax({
-                url: "/WorkCollect/GetSchule/" + $('select[name="Location_name"]').val(),
+                url: "/WorkCollect/GetSchule/" + Location_name,
                 dataType: "Json",
                 type: "get",
                 success: function (data) {

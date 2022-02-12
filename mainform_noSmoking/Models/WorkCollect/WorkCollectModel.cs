@@ -49,6 +49,8 @@ namespace mainform_noSmoking.Models.WorkCollect
             //DistrictList = temp;
 
             DistrictList = ShareModel.GetDistrict();
+            //Remove 'all district' option
+            DistrictList.RemoveAt(0);
 
             return DistrictList;
         }
@@ -76,7 +78,9 @@ namespace mainform_noSmoking.Models.WorkCollect
 
         public void PostSaveWork(IFormCollection data)
         {
-            int Schule_id = WorkCollectContext.GetSchule_id(data["Location_name"], data["Schule_name"]);
+            string Location_name = DistrictList[Convert.ToInt16(data["Location_name"]) - 1].Text;
+
+            int Schule_id = WorkCollectContext.GetSchule_id(Location_name, data["Schule_name"]);
 
             SchuleInfo = new()
             {
