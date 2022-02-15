@@ -55,6 +55,7 @@ namespace mainform_noSmoking.Models.Grading
             List<StudentInfo> tmp;
             if(status == 3)
             {
+                //ShareMode.GetWorks doesn't suppport get all status (status == 3 is not in define)
                 GradingContext.GetWorksByGrade(grade, status, out tmp);
             }
             else
