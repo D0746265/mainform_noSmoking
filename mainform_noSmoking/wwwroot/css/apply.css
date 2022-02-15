@@ -447,6 +447,11 @@ footer .organizer_logos {
     align-items: center;
 }
 
+footer .organizer_logos p {
+    font-weight: 900;
+    color: #000;
+}
+
 @media all and (max-width: 800px) {
     footer {
         clip-path: none;
@@ -462,10 +467,16 @@ footer .organizer_logos {
     }
 }
 
+footer .text_and_logo {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+}
+
 footer .logo {
     max-width: 170px;
     height: auto;
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 footer .logo img {

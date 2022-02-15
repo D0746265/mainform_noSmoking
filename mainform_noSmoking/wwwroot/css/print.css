@@ -239,6 +239,11 @@ footer .organizer_logos {
     align-items: center;
 }
 
+footer .organizer_logos p {
+    font-weight: 900;
+    color: #000;
+}
+
 @media all and (max-width: 800px) {
     footer {
         clip-path: none;
@@ -252,6 +257,12 @@ footer .organizer_logos {
     footer .organizer_logos a img{
         margin: 10px 0;
     }
+}
+
+footer .text_and_logo {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
 }
 
 footer .logo {
