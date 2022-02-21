@@ -187,11 +187,13 @@
                     var alles = document.querySelector('a[name="Alles"]');
                     var pending = document.querySelector('a[name="Pending"]');
                     var unPasses = document.querySelector('a[name="UnPasses"]');
-
+                    /*
                     if (alles.classList.contains("active"))
                         $("#nopapa").attr("style", "display: none");
                     else if (pending.classList.contains("active") || unPasses.classList.contains("active"))
                         $("#nopapa").attr("style", "display: null");
+                    */
+                    $("#nopapa").attr("style", "display: null");
                 },
                 error: function () { alert('Error occurred in get work.'); }
             })

@@ -62,7 +62,7 @@
             </p>
             <p>
                 <b>五、報名方式：</b>
-                至「我拒菸，我驕傲」網站(<a href="http://jolin.e-quit.org/" target="_new">http://jolin.e-quit.org/</a>) 點選【臺北市國小學童作品募集】，填妥基本資料並上傳照片，報名成功者可自行下載「我拒菸，我驕傲」證明。
+                至「我拒菸，我驕傲」網站(<a href="https://jolin.e-quit.org/" target="_new">https://jolin.e-quit.org/</a>) 點選【臺北市國小學童作品募集】，填妥基本資料並上傳照片，報名成功者可自行下載「我拒菸，我驕傲」證明。
             </p>
             <p>
                 <b>六、作品規範：</b><br>
@@ -281,7 +281,7 @@
                         url: decodeURIComponent(url),//ProvePrint
                         data: $("#WorkSubmitForm").serialize(),
                         success: function (result) {
-                            alert("Success!");
+                            alert("已上傳!");
                             $.ajax({
                                 type: "post",
                                 //processData: false,
@@ -293,7 +293,6 @@
                                 },
                                 dataType: "json",
                                 success: function () {
-                                    //alert("Success IN!");
                                     console.log(base64_code);
                                 }, error: function () { alert('Error occurred in get base64.'); }
                             })
@@ -330,16 +329,13 @@
         }
 
         $("#thought").on('input propertychange', function () {
-            //獲取輸入內容
             var userDesc = $(this).val();
-            //判斷字數
             var len;
             if (userDesc) {
                 len = checkStrLengths(userDesc, 200);
             } else {
                 len = 0
             }
-            //顯示字數
             $(".wordsNum").html('還剩下' + (200 - len) + '個字可以輸入');
         });
     </script>

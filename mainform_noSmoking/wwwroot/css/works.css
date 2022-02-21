@@ -379,6 +379,9 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+.pagination {
+    z-index: 0;
+}
 
 footer {
     background: #fff;

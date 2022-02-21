@@ -49,7 +49,7 @@ namespace mainform_noSmoking.Controllers
         public IActionResult GetBase64(string file_name, string base64)
         {
             string wwwRoot = _hostingEnvironment.WebRootPath + "\\Works";
-            string path = Path.Combine(wwwRoot, DateTime.Now.ToString("MMddhhmmss") + file_name);//for local test
+            string path = Path.Combine(wwwRoot, DateTime.Now.ToString("MMddhhmmss") + file_name.Replace(' ', '_'));//for local test
             //string path = System.IO.Path.Combine("C:\\inetpub\\wwwroot\\quitSmoking\\wwwroot\\Works", DateTime.Now.ToString("MMddhhmmss") + file_name);//for VM
 
             int index = base64.IndexOf("base64,");
