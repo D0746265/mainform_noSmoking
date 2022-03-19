@@ -266,14 +266,14 @@ namespace mainform_noSmoking.Models
                                 "SELECT * " +
                                 "FROM wo.dbo.Student_info " +
                                 "WHERE Pass_or_Not = " + Pass_or_not +
-                                "ORDER BY Student_id ASC;";
+                                "ORDER BY Student_id DESC;";
                         }else if (grade < 6)
                         {
                             cmdstring =
                            "SELECT * " +
                            "FROM wo.dbo.Student_info " +
                            "WHERE ( Student_grade = " + grade + " OR Student_grade = " + (grade + 1) + " ) AND Pass_or_Not = " + Pass_or_not +
-                           "ORDER BY Student_id ASC;";
+                           "ORDER BY Student_id DESC;";
                         }
                     }
                     else
@@ -284,7 +284,7 @@ namespace mainform_noSmoking.Models
                                 "SELECT * " +
                                 "FROM wo.dbo.Student_info " +
                                 "WHERE Pass_or_Not = " + Pass_or_not + " AND Schule_id = " + schule_id +
-                                "ORDER BY Student_id ASC;";
+                                "ORDER BY Student_id DESC;";
                         }
                         else if (grade < 6)
                         {
@@ -292,7 +292,7 @@ namespace mainform_noSmoking.Models
                            "SELECT * " +
                            "FROM wo.dbo.Student_info " +
                            "WHERE ( Student_grade = " + grade + " OR Student_grade = " + (grade + 1) + " ) AND Pass_or_Not = " + Pass_or_not+ " AND Schule_id = " + schule_id +
-                          "ORDER BY Student_id ASC;";
+                          "ORDER BY Student_id DESC;";
                         }
                     }
                     SqlCommand cmd = new SqlCommand(cmdstring, conn);
