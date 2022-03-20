@@ -29,6 +29,15 @@
         </div>
         <ul class="nav-links">
             <li>
+                <a name="Award">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-award" viewBox="0 0 16 16">
+                        <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702 1.509.229z" fill="#fff" />
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" fill="#fff" />
+                    </svg>
+                    <span class="links_name">佳作作品</span>
+                </a>
+            </li>
+            <li>
                 <a name="Alles">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25.271" height="22.112" viewBox="0 0 25.271 22.112">
                         <path id="Icon_awesome-archive" data-name="Icon awesome-archive" d="M1.579,22.782a1.578,1.578,0,0,0,1.579,1.579H22.112a1.578,1.578,0,0,0,1.579-1.579V8.568H1.579Zm7.9-10.464a.594.594,0,0,1,.592-.592H15.2a.594.594,0,0,1,.592.592v.395a.594.594,0,0,1-.592.592H10.069a.594.594,0,0,1-.592-.592ZM23.691,2.25H1.579A1.578,1.578,0,0,0,0,3.829V6.2a.792.792,0,0,0,.79.79H24.481a.792.792,0,0,0,.79-.79V3.829A1.578,1.578,0,0,0,23.691,2.25Z" transform="translate(0 -2.25)" fill="#fff" />
@@ -116,6 +125,27 @@
             } else
                 sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
         }
+    </script>
+
+    <script>
+        //show ...
+        $(document).on("click", 'a[name="Award"]', function () {
+            var grade = $('select[name="Student_grade"]').val();
+            $('input[name="Status"]').val(3);
+            $.ajax({
+                url: "/Grading/GetGradeWorks/" + grade + "/" + 4,
+                dataType: "html",
+                type: "get",
+                success: function (data) {
+                    status = 3
+                    $('#partialGrading').html(data);
+                    $('select[name="Student_grade"]').val(grade);
+                    $('#title_name').text("佳作作品");
+                },
+                error: function () { alert('Error occurred in show info by grade.'); }
+            })
+        })
+        //show
     </script>
 
     <script>
@@ -276,6 +306,22 @@
             })
         })
         //work reject
+
+        //work award
+        $(document).on("click", 'p[name="Award"]', function () {
+            var student_id = $('#Student_id').attr("name");
+            $.ajax({
+                url: "/Grading/Pass/" + student_id + "/4",
+                type: "get",
+                success: function () {
+                    $("#GradingModal").modal("hide");
+                    if (document.querySelector('a[name="Award"]').classList.contains("active") == false) {
+                        $("#" + student_id).remove();
+                    }
+                }
+            })
+        })
+        //work award
     </script>
 
     <script>

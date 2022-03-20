@@ -254,6 +254,10 @@
         //submit work ●●●●●
         $(document).on("click", 'input[name="SubmitWork"]', function (e) {
             //e.preventDefault();
+            //After deadline
+            alert("已超過報名日期，恕不接受作品繳交!");
+            return;
+            //After deadline
             var url = $(this).attr('formaction');
             var check = true;
             if ($("#school_area option:selected").text() == "請選擇區域") {

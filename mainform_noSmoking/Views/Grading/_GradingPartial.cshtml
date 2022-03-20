@@ -29,7 +29,7 @@
                 </td>
                 <td>@info.StudentInfo.Student_grade 年級</td>
                 <td>@info.FileInfo.Upload_time</td>
-                <td>@((info.StudentInfo.Pass_or_Not == 0)?"未審核":null)@((info.StudentInfo.Pass_or_Not == 1)?"已通過":null)@((info.StudentInfo.Pass_or_Not == 2)?"未通過":null) </td>
+                <td>@((info.StudentInfo.Pass_or_Not == 0)?"未審核":null)@((info.StudentInfo.Pass_or_Not == 1)?"已通過":null)@((info.StudentInfo.Pass_or_Not == 2)?"未通過":null)@((info.StudentInfo.Pass_or_Not == 4)? "佳作作品" : null) </td>
 
             </tr>
         }

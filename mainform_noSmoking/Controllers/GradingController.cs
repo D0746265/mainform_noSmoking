@@ -49,13 +49,13 @@ namespace mainform_noSmoking.Controllers
 
         [HttpGet]
         [Route("[controller]/[action]/{grade}/{status}")]
-        public IActionResult GetGradeWorks(int grade, int status)
+        public async Task<IActionResult> GetGradeWorks(int grade, int status)
         {
             Model.GetWorksByGrade(grade, status);
 
             ViewModels = Model.ShareModel.ViewModels;
 
-            return PartialView("_GradingPartial", Model);
+            return await Task.Run(() => PartialView("_GradingPartial", Model));
         }
         
         [HttpPost]
@@ -127,7 +127,7 @@ namespace mainform_noSmoking.Controllers
 
             for (int i = 0; i < ViewModels.Count; i++)
             {
-                content[i, 0] = (ViewModels[i].StudentInfo.Pass_or_Not == 0 ? "未審核" : string.Empty) + (ViewModels[i].StudentInfo.Pass_or_Not == 1 ? "已通過" : string.Empty) + (ViewModels[i].StudentInfo.Pass_or_Not == 2 ? "未通過" : string.Empty);
+                content[i, 0] = (ViewModels[i].StudentInfo.Pass_or_Not == 0 ? "未審核" : string.Empty) + (ViewModels[i].StudentInfo.Pass_or_Not == 1 ? "已通過" : string.Empty) + (ViewModels[i].StudentInfo.Pass_or_Not == 2 ? "未通過" : string.Empty) + (ViewModels[i].StudentInfo.Pass_or_Not == 4 ? "佳作作品" : string.Empty);
                 content[i, 1] = ViewModels[i].StudentInfo.Student_name;
                 content[i, 2] = ViewModels[i].SchuleInfo.Location_name;
                 content[i, 3] = ViewModels[i].SchuleInfo.Schule_name;

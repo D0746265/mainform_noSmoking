@@ -329,6 +329,12 @@ nav .profile-details i{
 .left_content .GradeButter #nopa {
   background: red;
   margin-left: 5px;
+  margin-right: 5px;
+}
+
+.left_content .GradeButter #award {
+    background: dodgerblue;
+    margin-left: 5px;
 }
 
 .left_content p {

@@ -35,21 +35,21 @@ namespace mainform_noSmoking.Controllers
 
         [HttpGet]
         [Route("[controller]/[action]/{district}")]
-        public IActionResult GetSchule(string district)
+        public async Task<IActionResult> GetSchule(string district)
         {//Works
             Model.GetSchules(district);
             SchuleSelectList = Model.ShareModel.SchuleSelectList;
 
-            return Json(Model.ShareModel.SchuleSelectList);
+            return await Task.Run(() => Json(Model.ShareModel.SchuleSelectList));
         }
 
-        public IActionResult Index(int Location_name_value = 0, int schule_id = 0, int grade = 0, int status = 1, int pageIndex = 1)
+        public async Task<IActionResult> Index(int Location_name_value = 0, int schule_id = 0, int grade = 0, int status = 1, int pageIndex = 1)
         {
-            return RedirectToAction("Works", new { Location_name_value, schule_id, grade, status, pageIndex });
+            return await Task.Run(() => RedirectToAction("Works", new { Location_name_value, schule_id, grade, status, pageIndex }));
         }
 
         [Route("[controller]/[action]")]
-        public IActionResult Works(int Location_name_value = 0, int schule_id = 0, int grade = 0, int status = 1, int pageIndex = 1)
+        public async Task<IActionResult> Works(int Location_name_value = 0, int schule_id = 0, int grade = 0, int status = 1, int pageIndex = 1)
         {//Works Page
             Model.Initial();
             
@@ -87,7 +87,7 @@ namespace mainform_noSmoking.Controllers
                 {"status", status }
             };
 
-            return View(Model);
+            return await Task.Run(() => View(Model));
         }
 
         //[HttpGet]
@@ -111,11 +111,11 @@ namespace mainform_noSmoking.Controllers
         //}
 
         [HttpGet]
-        public IActionResult GetWork(int id)
+        public async Task<IActionResult> GetWork(int id)
         {//Works get modal show
             Model.GetImage(id);
 
-            return PartialView("_WorkModalPartial", Model);
+            return await Task.Run(() => PartialView("_WorkModalPartial", Model));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

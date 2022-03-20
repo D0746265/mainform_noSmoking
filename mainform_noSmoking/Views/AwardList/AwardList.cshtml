@@ -1,10 +1,146 @@
-﻿@{
-}
-<html>
-<head>
+﻿@model mainform_noSmoking.Models.AwardList.AwardListModel
 
-</head>
-<body>
-    This is Award List Page!
-</body>
-</html>
+<div class="title">
+    <div class="normal_title">
+        <h3>臺北市國小學童</h3>
+        <div class="no_smoking">
+            <img src="~/images/no_smoking.png">
+        </div>
+        <h3>拒菸作品募集</h3>
+    </div>
+    <div class="rwd_title">
+        <div class="rwd_upper_title">
+            <h3>臺北市國小學童</h3>
+            <div class="no_smoking">
+                <img src="~/images/no_smoking.png">
+            </div>
+        </div>
+        <h3>拒菸作品募集</h3>
+    </div>
+</div>
+
+<div id="MAIN_NAV">
+    <!--選單-->
+    <div class="menu">
+        <a asp-controller="HomePage" asp-action="HomePage" target="_self">活動首頁</a>
+        <a asp-controller="WorkCollect" asp-action="WorkCollect" target="_self">報名頁面</a>
+        <a asp-controller="HomePage" asp-action="Works" name="selftrigger" target="_self">作品展示</a>
+    </div>
+</div>
+
+<div class="big_card">
+    <div class="card_body">
+        <div class="upper_content">
+            <h2>作品展示</h2>
+            <div class="filter_box">
+                <span>搜尋</span>
+                <select id="school_area" name="Location_name" asp-items="@Model.ShareModel.DistrictList" class="custom-select">
+                    <option selected disabled>請選擇區域</option>
+                </select>
+                <select name="Schule_name" id="Schule_name" asp-items="@Model.ShareModel.SchuleSelectList" class="custom-select">
+                    <option selected disabled>請選擇學校</option>
+                </select>
+                <select id="Student_grade" name="Student_grade" asp-items="@Model.ShareModel.GradeSelectList" class="custom-select">
+                </select>
+            </div>
+        </div>
+        <!--Works-->
+        <div id="partialWorks">
+            @await Html.PartialAsync("_WorksPartial", Model)
+        </div>
+        <!--Works-->
+    </div>
+</div>
+
+<nav style="display: flex;justify-content: center;">
+    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model.ViewModelsInPaging })
+</nav>
+<nav aria-label="Suppliers navigation example">
+    <vc:pager paging-list="@Model.ViewModelsInPaging" />
+</nav>
+
+@*work modal*@
+<div class="modal" id="WorkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-content">
+        <div id="partialWork">
+            @await Html.PartialAsync("_WorkModalPartial", Model)
+        </div>
+    </div>
+</div>
+@*work modal*@
+
+@section Scripts{
+    <script>
+        //show schools in selected district
+        $(document).on('change', 'select[name="Location_name"]', function () {
+            var Location_name = $('select[name="Location_name"]').val();
+            if (Location_name == 0) {   //when choose all district show all passed work
+                $('select[name="Schule_name"]>option').remove();
+                $('select[name="Schule_name"]').append($('<option selected disabled>').text('請選擇學校'));
+                document.location.href = "/AwardList/AwardList?Location_name_value=" + Location_name;
+            } else {    //when choose district show schules
+                Location_name = $('select[name="Location_name"]>option:selected').text();
+                $.ajax({
+                    url: "/AwardList/GetSchule/" + Location_name,
+                    dataType: "Json",
+                    type: "get",
+                    success: function (data) {
+                        $('select[name="Schule_name"]>option').remove();
+                        $('select[name="Schule_name"]').append($('<option selected disabled>').text('請選擇學校'));
+                        for (i = 0; i < data.length; i++) {
+                            var schule_name = data[i].text;
+                            var schule_id = data[i].value;
+
+                            $('select[name="Schule_name"]').append($('<option>').val(schule_id).text(schule_name));
+                        }
+                    },
+                    error: function () { alert('Error occurred in show schules.'); }
+                })
+            }
+
+        });
+        //show schools in selected district
+    </script>
+
+    <script>
+        var schule_id
+        var Location_name_value
+        //show infos in selected schools
+        $(document).on('change', 'select[name="Schule_name"]', function () {
+            var Location_name_value = $('select[name="Location_name"]>option:selected').val();
+            schule_id = $('select[name="Schule_name"]').val();
+            document.location.href = "/AwardList/AwardList?schule_id=" + schule_id + "&Location_name_value=" + Location_name_value;
+        });
+        //show infos in selected schools
+    </script>
+
+    <script>
+        //show infos in selected grade
+        $(document).on('change', 'select[name="Student_grade"]', function () {
+            var grade = $('select[name="Student_grade"]').val();
+            Location_name_value = $('select[name="Location_name"]>option:selected').val();
+            schule_id = $('select[name="Schule_name"]').val();
+            document.location.href = "/AwardList/AwardList?schule_id=" + schule_id + "&grade=" + grade + "&Location_name_value=" + Location_name_value;;
+        });
+        //show infos in selected grade
+    </script>
+
+    <script>
+        //show work modal
+        $(document).on("click", 'div[name="InfoCard"]', function () {
+            var id = $(this).attr("id");
+            $.ajax({
+                url: "/AwardList/GetWork/" + id,
+                dataType: "html",
+                type: "get",
+                success: function (data) {
+                    $("#partialWork").html(data);
+                    $("#WorkModal").modal("show");
+                    $('.modal-backdrop').remove();
+                },
+                error: function () { alert('Error occurred in get work.'); }
+            })
+        })
+                //show work modal
+    </script>
+}

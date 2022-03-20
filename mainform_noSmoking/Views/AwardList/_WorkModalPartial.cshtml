@@ -1,0 +1,18 @@
+﻿@using mainform_noSmoking.Models.Grading
+
+@model mainform_noSmoking.Models.AwardList.AwardListModel
+<span class="close" data-dismiss="modal">&times;</span>
+<div class="pop_content">
+    <div class="pop_image_wrapper">
+        <img src="@Model.ShareModel.ViewModel.FileInfo.File_location">
+    </div>
+    <div class="pop_text_wrapper">
+        <p>
+            <b>@Model.ShareModel.ViewModel.SchuleInfo.Schule_name @Model.ShareModel.ViewModel.StudentInfo.Student_grade 年級 @Model.ShareModel.ViewModel.StudentInfo.Student_name</b>
+        </p>
+        <p>
+            作品理念:
+            <br>@Model.ShareModel.ViewModel.FileInfo.Work_concept
+        </p>
+    </div>
+</div>
